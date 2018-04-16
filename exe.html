@@ -1,0 +1,47 @@
+<html><head>
+<title> AJAX Demo </title>
+<style>
+body{
+	text-align: center;
+}
+.displaybox{
+	margin: auto;
+	text-decoration-color: "#FF0000";	
+	color: "#FF0000";
+	width: 150px;
+
+	padding: 10px;
+	align: center;
+	font: 1.5em normal verdana, helvetica, arial; 
+}
+</style>
+<script>
+	var ajaxobject=new XMLHttpRequest();
+	function getServerTime() {
+	  if(!ajaxobject)
+	  {
+	  	document.getElementById("showtime").innerHTML="AJAX obejct could not be created";
+	  	return;
+	  }
+	  	  ajaxobject.open("GET","bday.php");
+	  	  ajaxobject.send();
+	  	  ajaxobject.onreadystatechange=getResponse; 	
+	}
+	function getResponse(){
+		if(ajaxobject.readyState == 4 && ajaxobject.status == 200)
+		{
+			document.getElementById('showtime').innerHTML=ajaxobject.responseText;
+		}
+	}
+</script>
+</head>
+	<body >
+		<h1>Today's your special day! </h1>
+		
+		<form>
+			<input value="Why's that?" onclick="getServerTime()" type="button">	
+		</form>
+		<div id="showtime" class="displaybox">
+		</div>	
+	
+</body></html>
